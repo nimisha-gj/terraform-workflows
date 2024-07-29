@@ -24,7 +24,7 @@ jobs:
       - name: Checkout terraform-workflows repository for config files
         uses: actions/checkout@v4
         with:
-          repository: your-org/terraform-workflows
+          repository: nimisha-gj/terraform-workflows
           token: ${{ secrets.GH_TOKEN }}
 
       - name: Render and Push terraform docs for main and modules
