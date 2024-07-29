@@ -15,7 +15,7 @@ jobs:
   generateDocs:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
+      - name: Checkout terraform-aws-ecs repository
         uses: actions/checkout@v4
         with:
           ref: ${{ inputs.ref }}
@@ -24,8 +24,8 @@ jobs:
       - name: Checkout terraform-workflows repository for config files
         uses: actions/checkout@v4
         with:
-          repository: nimisha-gj/terraform-workflows
-          path: terraform-workflows
+          repository: your-org/terraform-workflows
+          path: /tmp/terraform-workflows
           token: ${{ secrets.GH_TOKEN }}
 
       - name: Render and Push terraform docs for main and modules
@@ -33,11 +33,14 @@ jobs:
         with:
           working-dir: .
           git-push: true
-          config-file: terraform-workflows/.github/.terraform-docs.yaml
+          config-file: /tmp/terraform-workflows/terraform/.github/.terraform-docs.yaml
 
       - name: Render and Push terraform docs for examples
         uses: terraform-docs/gh-actions@main
         with:
-          working-dir: ./examples
+          working-dir: .
           git-push: true
-          config-file: terraform-workflows/.github/.terraform-docs-example.yaml
+          config-file: /tmp/terraform-workflows/terraform/.github/.terraform-docs-example.yaml
+
+      - name: Clean up temporary files
+        run: rm -rf /tmp/terraform-workflows
