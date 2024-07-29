@@ -41,3 +41,6 @@ jobs:
           working-dir: ./examples
           git-push: true
           config-file: terraform-workflows/.github/.terraform-docs-example.yaml
+
+      - name: Clean up temporary files
+        run: rm -rf terraform-workflows
