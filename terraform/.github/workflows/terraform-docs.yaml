@@ -1,0 +1,46 @@
+name: Terraform Docs
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  pull_request:
+    branches:
+      - main
+      - master
+
+env:
+  TERRAFORM_DOCS_VERSION: v0.18.0
+
+jobs:
+  generateDocs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout terraform-aws-ecs repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Checkout terraform-workflows repository for config files
+        uses: actions/checkout@v4
+        with:
+          repository: nimishgj/terraform-workflows
+          path: terraform-workflows
+          ref: main
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Render and Push terraform docs for main and modules
+        uses: terraform-docs/gh-actions@main
+        with:
+          working-dir: .
+          git-push: true
+          config-file: terraform-workflows/terraform/.github/.terraform-docs.yaml
+
+      - name: Render and Push terraform docs for examples
+        uses: terraform-docs/gh-actions@main
+        with:
+          working-dir: .
+          git-push: true
+          config-file: terraform-workflows/terraform/.github/.terraform-docs-example.yaml
