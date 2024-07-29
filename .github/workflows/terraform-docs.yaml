@@ -32,14 +32,14 @@ jobs:
         with:
           working-dir: .
           git-push: true
-          config-file: terraform-workflows/terraform/.github/.terraform-docs.yaml
+          config-file: terraform-workflows/.github/.terraform-docs.yaml
 
       - name: Render and Push terraform docs for examples
         uses: terraform-docs/gh-actions@main
         with:
           working-dir: ./examples
           git-push: true
-          config-file: terraform-workflows/terraform/.github/.terraform-docs-example.yaml
+          config-file: terraform-workflows/.github/.terraform-docs-example.yaml
 
       - name: Clean up temporary files
         run: rm -rf terraform-workflows
