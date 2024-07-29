@@ -25,7 +25,6 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: your-org/terraform-workflows
-          path: /tmp/terraform-workflows
           token: ${{ secrets.GH_TOKEN }}
 
       - name: Render and Push terraform docs for main and modules
@@ -33,14 +32,14 @@ jobs:
         with:
           working-dir: .
           git-push: true
-          config-file: /tmp/terraform-workflows/terraform/.github/.terraform-docs.yaml
+          config-file: terraform-workflows/terraform/.github/.terraform-docs.yaml
 
       - name: Render and Push terraform docs for examples
         uses: terraform-docs/gh-actions@main
         with:
-          working-dir: .
+          working-dir: ./examples
           git-push: true
-          config-file: /tmp/terraform-workflows/terraform/.github/.terraform-docs-example.yaml
+          config-file: terraform-workflows/terraform/.github/.terraform-docs-example.yaml
 
       - name: Clean up temporary files
-        run: rm -rf .terraform-workflows
+        run: rm -rf terraform-workflows
