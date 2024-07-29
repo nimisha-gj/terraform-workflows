@@ -43,4 +43,4 @@ jobs:
           config-file: /tmp/terraform-workflows/terraform/.github/.terraform-docs-example.yaml
 
       - name: Clean up temporary files
-        run: rm -rf /tmp/terraform-workflows
+        run: rm -rf .terraform-workflows
