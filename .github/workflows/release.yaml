@@ -23,7 +23,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         with:
-          ref: ${{ inputs.ref }}
           token: ${{ secrets.GH_TOKEN }}
 
       - name: Create .releaserc.json
