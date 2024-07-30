@@ -1,11 +1,15 @@
 name: 'Validate PR title'
 
 on:
-  pull_request_target:
-    types:
-      - opened
-      - edited
-      - synchronize
+  workflow_call:
+    inputs:
+      ref:
+        description: 'The git ref to checkout'
+        required: true
+        type: string
+    secrets:
+      GH_TOKEN:
+        required: true
 
 jobs:
   main:
@@ -16,7 +20,7 @@ jobs:
       # https://github.com/amannn/action-semantic-pull-request/releases
       - uses: amannn/action-semantic-pull-request@v5.4.0
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         with:
           # Configure which types are allowed.
           # Default: https://github.com/commitizen/conventional-commit-types
