@@ -33,9 +33,6 @@ jobs:
       - name: asdf
         run: cd .. && ls -la
 
-      - name: Install Dependencies
-        run: npm install --no-save cycjimmy/semantic-release-action@v2
-
       - name: Release
         uses: cycjimmy/semantic-release-action@v2
         id: semantic
