@@ -31,7 +31,7 @@ jobs:
 
   release:
     name: Module Release
-    needs: generateDocs
+    needs: preCommitCheck
     uses: nimisha-gj/terraform-workflows/.github/workflows/release.yaml@main
     with:
       ref: ${{ inputs.ref }}
