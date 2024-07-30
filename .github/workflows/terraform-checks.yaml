@@ -93,9 +93,11 @@ jobs:
 
       - name: print ls
         run: |
-          echo "Directory: ${{ matrix.directory }}"
-          && ls
-          && pwd
+          ls -l
+      
+      - name: print pwd
+        run: |
+          pwd
 
       - name: Pre-commit Terraform ${{ steps.minMax.outputs.minVersion }}
         # Run only validate pre-commit check on min version supported
@@ -152,4 +154,3 @@ jobs:
           tflint-version: ${{ env.TFLINT_VERSION }}
           terraform-docs-version: ${{ env.TERRAFORM_DOCS_VERSION }}
           install-hcledit: true
-          args: 'terraform_validate --color=always --show-diff-on-failure --files $(ls *.tf)  --config terraform-workflows/.github/.pre-commit-config.yaml'
