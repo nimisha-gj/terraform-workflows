@@ -15,6 +15,10 @@ jobs:
   prTitleValidation:
     name: Validate PR Title
     uses: nimisha-gj/terraform-workflows/.github/workflows/pr-title.yaml@main
+    with:
+      ref: ${{ inputs.ref }}
+    secrets:
+      GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
   preCommitCheck:
     name: Terraform Checks
