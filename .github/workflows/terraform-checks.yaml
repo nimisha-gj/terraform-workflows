@@ -113,7 +113,7 @@ jobs:
         with:
           terraform-version: ${{ steps.minMax.outputs.minVersion }}
           tflint-version: ${{ env.TFLINT_VERSION }}
-          args: 'terraform_validate --color=always --show-diff-on-failure --files ${{ matrix.directory }}/*'
+          args: 'terraform_validate --color=always --show-diff-on-failure --files ${{ matrix.directory }}/* --config terraform-workflows/.github/.pre-commit-config.yaml'
 
       - name: Pre-commit Terraform ${{ steps.minMax.outputs.minVersion }}
         # Run only validate pre-commit check on min version supported
@@ -122,7 +122,7 @@ jobs:
         with:
           terraform-version: ${{ steps.minMax.outputs.minVersion }}
           tflint-version: ${{ env.TFLINT_VERSION }}
-          args: 'terraform_validate --color=always --show-diff-on-failure --files $(ls *.tf)  --config terraform-workflows/.github/.pre-commit-config.yaml'
+          args: 'terraform_validate --color=always --show-diff-on-failure --files $(ls *.tf) --config terraform-workflows/.github/.pre-commit-config.yaml'
 
   preCommitMaxVersion:
     name: Max TF pre-commit
