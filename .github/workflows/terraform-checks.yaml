@@ -103,7 +103,7 @@ jobs:
       - name: print lsa
         run: |
           ls -la /home/runner/work
-          ls -la /home/runner/work/terraform-workflows/terraform-workflows
+          ls -la /home/runner/work/TESTING/TESTING/terraform-workflows
           ls -la /home/runner/work/TESTING/TESTING
 
       - name: Pre-commit Terraform ${{ steps.minMax.outputs.minVersion }}
