@@ -42,5 +42,9 @@ jobs:
           git-push: true
           config-file: terraform-workflows/.github/.terraform-docs-example.yaml
 
+      - name: Get Latest Ref
+        id: get_latest_ref
+        run: echo "::set-output name=latest_ref::$(git rev-parse HEAD)"
+
       - name: Clean up temporary files
-        run: rm -rf terraform-workflows 
+        run: rm -rf terraform-workflows
