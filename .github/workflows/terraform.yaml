@@ -1,0 +1,40 @@
+name: Terraform Master Workflow
+
+on:
+  workflow_call:
+    inputs:
+      ref:
+        description: 'The git ref to checkout'
+        required: true
+        type: string
+    secrets:
+      GH_TOKEN:
+        required: true
+
+jobs:
+  prTitleValidation:
+    name: Validate PR Title
+    uses: nimisha-gj/terraform-workflows/.github/workflows/pr-title.yaml@main
+
+  preCommitCheck:
+    name: Terraform Checks
+    needs: prTitleValidation
+    uses: nimisha-gj/terraform-workflows/.github/workflows/terraform-checks.yaml@main
+
+  generateDocs:
+    name: Generate Terraform Docs
+    needs: preCommitCheck
+    uses: nimisha-gj/terraform-workflows/.github/workflows/terraform-docs.yaml@main
+    with:
+      ref: ${{ inputs.ref }}
+    secrets:
+      GH_TOKEN: ${{ secrets.GH_TOKEN }}
+    
+  release:
+      name: Module Release
+      needs: generateDocs
+      uses: nimisha-gj/terraform-workflows/.github/workflows/release.yaml@main
+      with:
+        ref: ${{ inputs.ref }}
+      secrets:
+        GH_TOKEN: ${{ secrets.GH_TOKEN }}
