@@ -22,7 +22,7 @@ jobs:
 
   generateDocs:
     name: Generate Terraform Docs
-    needs: preCommitCheck
+    needs: release
     uses: nimisha-gj/terraform-workflows/.github/workflows/terraform-docs.yaml@main
     with:
       ref: ${{ inputs.ref }}
