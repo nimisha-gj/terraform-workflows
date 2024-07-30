@@ -44,7 +44,7 @@ jobs:
 
       - name: Get Latest Ref
         id: get_latest_ref
-        run: echo "::set-output name=latest_ref::$(git rev-parse HEAD)"
+        run: echo "latest_ref=$(git rev-parse HEAD)" >> $GITHUB_ENV
 
       - name: Clean up temporary files
         run: rm -rf terraform-workflows
