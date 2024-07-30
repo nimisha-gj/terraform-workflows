@@ -25,13 +25,6 @@ jobs:
         with:
           ref: ${{ inputs.ref }}
           token: ${{ secrets.GH_TOKEN }}
-      
-      - name: ls
-        run: ls -la
-      - name: pwd
-        run: pwd
-      - name: asdf
-        run: cd .. && ls -la
 
       - name: Release
         uses: cycjimmy/semantic-release-action@v2
@@ -43,6 +36,9 @@ jobs:
             @semantic-release/git@10.0.0
             conventional-changelog-conventionalcommits@4.6.3
           branches: '[{"name": "main"}]'
+          debug: false
+          ci: true
+          dryRun: false
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
           BRANCHES: '["main"]'
