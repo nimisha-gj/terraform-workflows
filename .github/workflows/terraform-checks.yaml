@@ -91,20 +91,6 @@ jobs:
         with:
           directory: ${{ matrix.directory }}
 
-      - name: print ls
-        run: |
-          ls -l
-      
-      - name: print pwd
-        run: |
-          pwd
-          
-          
-      - name: print lsa
-        run: |
-          ls -la /home/runner/work
-          ls -la /home/runner/work/TESTING/TESTING/terraform-workflows
-          ls -la /home/runner/work/TESTING/TESTING
 
       - name: Pre-commit Terraform ${{ steps.minMax.outputs.minVersion }}
         # Run only validate pre-commit check on min version supported
