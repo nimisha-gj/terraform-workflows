@@ -26,6 +26,22 @@ jobs:
           ref: ${{ inputs.ref }}
           token: ${{ secrets.GH_TOKEN }}
 
+      - name: Create .releaserc.json
+        run: |
+          echo '{
+            "branches": [
+              "main"
+            ],
+            "debug": false,
+            "ci": true,
+            "dryRun": false,
+            "plugins": [
+              "@semantic-release/commit-analyzer",
+              "@semantic-release/release-notes-generator",
+              "@semantic-release/github"
+            ]
+          }' > .releaserc.json
+        
       - name: Release
         uses: cycjimmy/semantic-release-action@v2
         id: semantic
@@ -35,11 +51,7 @@ jobs:
             @semantic-release/changelog@6.0.0
             @semantic-release/git@10.0.0
             conventional-changelog-conventionalcommits@4.6.3
-          branches: '[{"name": "main"}]'
-          debug: false
-          ci: true
-          dryRun: false
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-          BRANCHES: '["main"]'
+
 
