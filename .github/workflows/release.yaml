@@ -33,11 +33,14 @@ jobs:
       - name: asdf
         run: cd .. && ls -la
 
+      - name: Install Dependencies
+        run: npm install --no-save cycjimmy/semantic-release-action@v2
+
       - name: Release
         uses: cycjimmy/semantic-release-action@v2
+        id: semantic
         with:
           semantic_version: 18.0.0
-          working_directory: /home/runner/work/TESTING/TESTING
           extra_plugins: |
             @semantic-release/changelog@6.0.0
             @semantic-release/git@10.0.0
@@ -46,3 +49,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
           BRANCHES: '["main"]'
+
